@@ -1,0 +1,56 @@
+ALGORITHME compteur_ph //(projet1)
+VAR
+    cpt_car, cpt_mot, cpt_voy: INTEGER
+    ph: STRING
+    car_courant: CHAR
+    i: INTEGER // Indice pour parcourir la phrase
+
+BEGIN
+    // Initialisation des compteurs
+    cpt_car := 0
+    cpt_mot := 0
+    cpt_voy := 0
+
+    // Lecture de la phrase
+    Write("Donnez moi la phrase : ")
+    Read(ph)
+
+    // Initialisation de l'indice
+    i := 0
+    car_courant := ph[i] // Premier caractère de la phrase
+
+    // Parcours de la phrase caractère par caractère
+    WHILE (car_courant <> '.') DO
+        // Je compte les caractères
+        cpt_car := cpt_car + 1
+
+        // Je teste si le caractère courant est une voyelle
+        IF (car_courant = 'a' OR car_courant = 'A' OR 
+            car_courant = 'e' OR car_courant = 'E' OR 
+            car_courant = 'i' OR car_courant = 'I' OR 
+            car_courant = 'o' OR car_courant = 'O' OR 
+            car_courant = 'u' OR car_courant = 'U') THEN
+            cpt_voy := cpt_voy + 1
+        END_IF
+
+        // Je teste si le caractère courant est un espace (début d'un nouveau mot)
+        IF (car_courant = ' ') THEN
+            cpt_mot := cpt_mot + 1
+        END_IF
+
+        // Passage au caractère suivant
+        i := i + 1
+        car_courant := ph[i]
+    END_WHILE
+
+    // Ajouter 1 pour le dernier mot (car il n'est pas suivi d'un espace)
+    cpt_mot := cpt_mot + 1
+
+    // Ajouter 1 pour le point final (caractère '.')
+    cpt_car := cpt_car + 1
+
+    // Affichage des résultats
+    Write("Le nombre de caractères dans cette phrase : ", cpt_car)
+    Write("Le nombre de voyelles dans cette phrase : ", cpt_voy)
+    Write("Le nombre de mots dans cette phrase : ", cpt_mot)
+END
